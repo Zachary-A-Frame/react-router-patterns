@@ -12,10 +12,10 @@ import Home from "./Components/Home"
 import AddColor from './Components/AddColor';
 
 function App() {
-  const [colors, setColors] = useState("")
+  const [colors, setColors] = useState(["green", "red", "purple"])
 
-  const colorData = (selectedColorData) => {
-    setColors(selectedColorData)
+  const handleAdd = newColor => {
+    setColors(data => ([...data, newColor]))
   }
 
   return (
@@ -24,7 +24,7 @@ function App() {
         <Switch>
           <Route exact path="/" element={<Home colors={colors} />} />
           <Route exact path="/:color" element={<ColorPage />} />
-          <Route exact path="/add" colorData={colorData} element={<AddColor />} />
+          <Route exact path="/add" element={<AddColor handleAdd={handleAdd} />} />
           <Route path="*" element={<Navigate to="/" />} />
         </Switch>
       </Router>
